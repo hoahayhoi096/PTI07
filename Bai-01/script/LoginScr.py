@@ -18,13 +18,30 @@ class Login(QMainWindow):
         self.database = AccountDatabase()
         self.setup_login()
 
+        self.pushButtonDangNhap.clicked.connect(self.onPushButtonDangNhapClicked)
 
+    def onPushButtonDangNhapClicked(self):
+        taiKhoan = self.lineEditTaiKhoan.text()
+        matKhau = self.lineEditMatKhau.text()
+
+        isAuth = False 
+        for item in self.database.account_list:
+            if item.email == taiKhoan and item.password == matKhau:
+                isAuth = True
+                break
+        
+        if isAuth == True:
+            self.controller.show_main_page()
+            self.close()
+        else:
+            QMessageBox.information(self, "Đây là thông báo!", "Đăng nhập thất bại, Vui lòng đăng nhập lại!")
+        
+        
     def setup_login(self):
         self.database.load_data()
-        for abc in self.database.account_list:
-            print("Tài khoản: ")
-            print(abc.email)
-            print(abc.password)
+
+
+    
 
     
         
