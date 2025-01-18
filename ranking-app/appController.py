@@ -1,15 +1,15 @@
 from script.LoginScr import Login
 from script.MainPageScr import MainPage
-# from model.database import AnimeDatabase
+from model.database import AnimeDatabase
 
 
 class Controller: 
     def __init__(self):
         # Khởi tạo dữ liệu 
-        # self.db = AnimeDatabase()
+        self.database = AnimeDatabase()
 
         #Khởi tạo tác cửa sổ 
-        self.main_window = MainPage(self)
+        self.main_window = MainPage(self, self.database)
         self.login_window = Login(self)
 
     def show_main_page(self):

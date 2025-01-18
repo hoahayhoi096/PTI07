@@ -1,5 +1,6 @@
 from model.account import Account
-from data.data_io import load_account_json_data, write_account_json_data
+from model.anime import Anime
+from data.data_io import load_account_json_data, write_account_json_data, load_anime_json_data
 
 class AccountDatabase:
     def __init__(self):
@@ -18,3 +19,17 @@ class AccountDatabase:
         self.account_list.append(new_item)
         self.account_dict_data.append(account_dict)
         write_account_json_data(self.account_dict_data)
+
+
+class AnimeDatabase:
+    def __init__(self):
+        self.anime_list = list()
+        self.anime_dict_data = load_anime_json_data()
+
+    def load_data(self): # Lấp đầy dữ liệu cho self.anime_list
+        for anime_dict in self.anime_dict_data:
+            anime = Anime(title = anime_dict["title"],
+                              release_date= anime_dict["release_date"],
+                              image=anime_dict["image"],
+                              rating=anime_dict["rating"])
+            self.anime_list.append(anime)
