@@ -13,6 +13,15 @@ def load_anime_json_data():
     anime_dict_data.extend(json_data)
     return anime_dict_data
 
+def write_anime_json_data(json_data):
+    """  Ghi dữ liệu anime vào tệp JSON.
+    Tham số:
+    json_data (dict hoặc list): Dữ liệu cần ghi vào tệp JSON.
+    """
+    # Mở tệp JSON trong chế độ ghi ("w")
+    with open(Config.ANIME_JSON_PATH, "w") as json_out:
+        # Ghi dữ liệu json_data vào tệp dưới dạng JSON
+        json.dump(json_data, json_out)
 
 def load_account_json_data():
     # Khởi tạo một danh sách rỗng:

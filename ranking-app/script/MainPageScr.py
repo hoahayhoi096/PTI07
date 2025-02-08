@@ -3,6 +3,7 @@ from PyQt6 import uic
 import os
 from config import Config
 from PyQt6.QtCore import Qt
+from script.DialogScr import AddDialog
 
 
 class MainPage(QMainWindow):  
@@ -22,6 +23,8 @@ class MainPage(QMainWindow):
         self.pushButtonManager.clicked.connect(self.onPushButtonManager)
 
         self.setup_manager_page()
+
+        self.pushButtonAdd.clicked.connect(self.onPushButtonAdd);
 
 
     def onPushButtonManager(self):
@@ -55,6 +58,21 @@ class MainPage(QMainWindow):
 
         self.listWidgetAnime.setCurrentRow(0)
 
+    def onPushButtonAdd(self):
+        # Lấy chỉ số của dòng hiện tại trong listWidgetAnime
+        currIndex = self.listWidgetAnime.currentRow()
+        # Tạo hộp thoại Add dialog
+        add_dialog = AddDialog()
 
+        # Hiển thị hộp thoại và thêm dữ liệu mới khi người dùng nhấn ok
+        if add_dialog.exec():
+            # Lấy dữ liệu từ hộp thoại dưới dạng một dictionary
+            inputs = add_dialog.return_input_fields()
+
+            # Thêm mục mới vào danh sách listWidgetAnime tại vị trí currIndex
+            self.listWidgetAnime.insertItem(currIndex, inputs["title"])
+
+            # Lưu dữ liệu mới vào cơ sở dữ liệu
+            self.database.add_item_from_dict(inputs)
 
 

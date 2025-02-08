@@ -1,6 +1,7 @@
 from model.account import Account
 from model.anime import Anime
-from data.data_io import load_account_json_data, write_account_json_data, load_anime_json_data
+from data.data_io import load_account_json_data, write_account_json_data, load_anime_json_data, write_anime_json_data
+from datetime import datetime
 
 class AccountDatabase:
     def __init__(self):
@@ -33,3 +34,20 @@ class AnimeDatabase:
                               image=anime_dict["image"],
                               rating=anime_dict["rating"])
             self.anime_list.append(anime)
+
+    def add_item_from_dict(self, anime_dict):
+        new_item = Anime(title=anime_dict["title"],
+                             release_date=anime_dict["release_date"],
+                             image=anime_dict["image"],
+                             rating=anime_dict["rating"],
+                             link=anime_dict["link"])
+        self.anime_list.append(new_item)
+        self.anime_dict_data.append(anime_dict)
+        write_anime_json_data(self.anime_dict_data)
+
+
+def date_to_text(date:datetime):
+    return date.strftime("%b %Y")
+
+def format_date(date_text):
+    return datetime.strptime(date_text, '%b %Y')
