@@ -1,7 +1,8 @@
-from PyQt6.QtWidgets import QMainWindow
+from PyQt6.QtWidgets import QMainWindow, QListWidgetItem
 from PyQt6 import uic 
 import os
 from config import Config
+from PyQt6.QtCore import Qt
 
 
 class MainPage(QMainWindow):  
@@ -20,23 +21,40 @@ class MainPage(QMainWindow):
         self.pushButtonAnime.clicked.connect(self.onPushButtonAnime)
         self.pushButtonManager.clicked.connect(self.onPushButtonManager)
 
+        self.setup_manager_page()
+
+
     def onPushButtonManager(self):
         self.stackedWidget.setCurrentIndex(3)
 
 
     def onPushButtonAnime(self):
         self.stackedWidget.setCurrentIndex(2)
-        # lấp đầy list_anime trong database
-        self.database.load_data()
-        # Duyệt qua các bộ anime và in ra màn terminal để kiểm tra
-        ds_anime = self.database.anime_list
-        for anime in ds_anime:
-            print("Anime: ", anime.title, "-" , anime.release_date)
 
     def onPushButtonHome(self):
         self.stackedWidget.setCurrentIndex(1)
 
     def onPushButtonAccount(self):
         self.stackedWidget.setCurrentIndex(0)
+
+    def setup_manager_page(self):
+        #Lấp đầy dữ liệu cho list anime
+        self.database.load_data()
+
+        # Xoá đi dữ liệu có từ trước trong list widget
+        self.listWidgetAnime.clear()
+
+        #Thêm dữ liệu vào list widget
+        for item in self.database.anime_list:
+            # Tạo phần tử con của listWidget
+            listWidgetItem = QListWidgetItem(item.title)
+            # Gán mã id của anime vào UserRole(lưu trữ tạm dữ liệu)
+            listWidgetItem.setData(Qt.ItemDataRole.UserRole, item.id)
+            # Thêm item vào listWidget
+            self.listWidgetAnime.addItem(listWidgetItem)
+
+        self.listWidgetAnime.setCurrentRow(0)
+
+
 
 

@@ -22,5 +22,11 @@
     "release_date": "Jul 2023",
     "image": "",
     "rating": 7.0
+  }, 
+  {
+    "title": "ABC",
+    "release_date": "June 2023",
+    "image": "",
+    "rating": 5.0
   }
 ]
