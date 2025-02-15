@@ -7,3 +7,11 @@ class Anime:
         self.image = image
         self.rating = float(rating)
         self.link = link
+
+    def update(self, new_data):
+        # Chỉ cập nhật những trường dữ liệu được thay đổi
+        for key, value in new_data.items():
+            if value:
+                setattr(self, key, value)
+
+    

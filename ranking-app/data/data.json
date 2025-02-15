@@ -1,41 +1,58 @@
 [
   {
-    "title": "Mononoke Hime",
+    "id": "018d518a-bdf1-4103-aa68-5ae1d9858bc9",
+    "title": "Mononoke Himeeeeeeee",
     "release_date": "Jul 1997",
-    "image": "",
-    "rating": 10.0
+    "image": "Browse",
+    "rating": 9.0,
+    "link": "None"
   },
   {
+    "id": "ddca91df-6467-4ef4-82d0-6f1d17c8c691",
     "title": "Sousou no Frieren",
     "release_date": "Sep 2023",
     "image": "",
-    "rating": 9.0
+    "rating": 9.0,
+    "link": null
   },
   {
+    "id": "ee3ebea7-db7d-44ca-a0c6-d8d72556acb2",
     "title": "One Piece",
     "release_date": "Oct 1999",
     "image": "",
-    "rating": 8.0
+    "rating": 8.0,
+    "link": null
   },
   {
+    "id": "87465336-3079-4824-be17-3d302b5b17cd",
     "title": "Jujutsu no Kaisen 2nd Season",
     "release_date": "Jul 2023",
     "image": "",
-    "rating": 7.0
+    "rating": 7.0,
+    "link": null
   },
-  { "title": "ABC", "release_date": "June 2023", "image": "", "rating": 5.0 },
   {
+    "id": "cd21a451-d2c5-43e2-b12d-4fbb57be55c8",
+    "title": "ABC",
+    "release_date": "June 2023",
+    "image": "",
+    "rating": 5.0,
+    "link": null
+  },
+  {
+    "id": "452e0c30-0b8e-4ade-8e1d-c5fbedb6d24d",
     "title": "XYZ",
     "release_date": "Jan 2000",
     "image": "Browse",
     "rating": 10.0,
-    "link": "None"
+    "link": null
   },
   {
+    "id": "9fef5254-1e67-4c21-bde2-628fe3cf4093",
     "title": "GHI",
     "release_date": "Jan 2000",
     "image": "Browse",
     "rating": 10.0,
-    "link": "None"
+    "link": null
   }
 ]

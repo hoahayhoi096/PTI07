@@ -88,6 +88,12 @@ class MainPage(QMainWindow):
             edit_item = self.database.get_item_by_id(anime_id)
             # Khởi tạo hộp thoại EditDialog 
             edit_dialog = EditDialog(edit_item)
-            # Mở hộp thoại lên 
-            edit_dialog.exec()
+            # Mở hộp thoại lên & kiểm tra nếu có dữ liệu được tra về thì thực hành động ...
+            if edit_dialog.exec():
+                # Lấy các trường dữ liệu có trong hộp thoại ra 
+                inputs = edit_dialog.return_input_fields()
+                # Cập nhập lại tiêu đề anime trong listWidget
+                current_item.setText(inputs["title"])
+                # Cập nhật lại dữ liệu trong file json
+                self.database.edit_item_from_dict(anime_id, inputs)
 

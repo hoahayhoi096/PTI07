@@ -35,6 +35,13 @@ class AnimeDatabase:
                               rating=anime_dict["rating"])
             self.anime_list.append(anime)
 
+    # chuyển object python sang json
+    def item_to_data(self):
+        json_data = list()
+        for anime in self.anime_list:
+            json_data.append(anime.__dict__)
+        return json_data 
+    
     def add_item_from_dict(self, anime_dict):
         new_item = Anime(title=anime_dict["title"],
                              release_date=anime_dict["release_date"],
@@ -49,6 +56,15 @@ class AnimeDatabase:
         for anime in self.anime_list:
             if anime.id == anime_id:
                 return anime
+            
+    def edit_item_from_dict(self, edit_id, anime_edit: Anime):
+        anime = self.get_item_by_id(edit_id)
+        # Gọi hàm update từ file anime.py để cập nhật lại dữ liệu mới
+        anime.update(anime_edit)
+        # Chuyển dữ liệu python sang json
+        self.anime_dict_data = self.item_to_data()
+        # Viết dữ liệu mới vào json
+        write_anime_json_data(self.anime_dict_data) 
 
 
 def date_to_text(date:datetime):
