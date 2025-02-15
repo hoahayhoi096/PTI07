@@ -3,7 +3,7 @@ from PyQt6 import uic
 import os
 from config import Config
 from PyQt6.QtCore import Qt
-from script.DialogScr import AddDialog
+from script.DialogScr import AddDialog , EditDialog
 
 
 class MainPage(QMainWindow):  
@@ -24,7 +24,8 @@ class MainPage(QMainWindow):
 
         self.setup_manager_page()
 
-        self.pushButtonAdd.clicked.connect(self.onPushButtonAdd);
+        self.pushButtonAdd.clicked.connect(self.onPushButtonAdd)
+        self.pushButtonEdit.clicked.connect(self.onPushButtonEdit)
 
 
     def onPushButtonManager(self):
@@ -75,4 +76,18 @@ class MainPage(QMainWindow):
             # Lưu dữ liệu mới vào cơ sở dữ liệu
             self.database.add_item_from_dict(inputs)
 
+    def onPushButtonEdit(self):
+        # Lấy phần tử trong listWidgetAnime
+        current_item = self.listWidgetAnime.currentItem()
+
+        if current_item:
+            # Lấy id của bộ anime từ UserRole
+            anime_id = current_item.data(Qt.ItemDataRole.UserRole)
+
+            # Lấy bộ anime bằng id 
+            edit_item = self.database.get_item_by_id(anime_id)
+            # Khởi tạo hộp thoại EditDialog 
+            edit_dialog = EditDialog(edit_item)
+            # Mở hộp thoại lên 
+            edit_dialog.exec()
 

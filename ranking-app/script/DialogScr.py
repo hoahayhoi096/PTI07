@@ -63,3 +63,20 @@ class AddDialog(Dialog):
         self.ui.uploadImgButton.clicked.connect(lambda: self._browse_files())
         self.ui.releasedateInput.setDisplayFormat("dd/MM/yyyy")
 
+class EditDialog(Dialog):
+    UI_LOCATION = os.path.join(Config.UI_DIR, "edit_dialog.ui")
+
+    def __init__(self, edit_item: Anime):
+        super().__init__(EditDialog)
+
+        self.ui = uic.loadUi(self.UI_LOCATION, self)
+
+        self.ui.titleInput.setText(edit_item.title)
+        self.ui.ratingInput.setText(str(edit_item.rating))
+        self.ui.urlInput.setText(edit_item.link)
+        self.ui.uploadImgButton.clicked.connect(lambda: self._browse_files())
+        self.ui.releasedateInput.setDisplayFormat("dd/MM/yyyy")
+        date = format_date(edit_item.release_date)
+        self.ui.releasedateInput.setDate(date)
+
+

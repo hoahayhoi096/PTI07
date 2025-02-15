@@ -45,6 +45,11 @@ class AnimeDatabase:
         self.anime_dict_data.append(anime_dict)
         write_anime_json_data(self.anime_dict_data)
 
+    def get_item_by_id(self, anime_id) -> Anime:
+        for anime in self.anime_list:
+            if anime.id == anime_id:
+                return anime
+
 
 def date_to_text(date:datetime):
     return date.strftime("%b %Y")
