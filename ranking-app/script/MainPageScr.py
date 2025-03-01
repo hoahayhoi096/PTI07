@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMainWindow, QListWidgetItem
+from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QMessageBox
 from PyQt6 import uic 
 import os
 from config import Config
@@ -26,11 +26,10 @@ class MainPage(QMainWindow):
 
         self.pushButtonAdd.clicked.connect(self.onPushButtonAdd)
         self.pushButtonEdit.clicked.connect(self.onPushButtonEdit)
-
+        self.pushButtonDelete.clicked.connect(self.onPushButtonDelete)
 
     def onPushButtonManager(self):
         self.stackedWidget.setCurrentIndex(3)
-
 
     def onPushButtonAnime(self):
         self.stackedWidget.setCurrentIndex(2)
@@ -96,4 +95,38 @@ class MainPage(QMainWindow):
                 current_item.setText(inputs["title"])
                 # Cập nhật lại dữ liệu trong file json
                 self.database.edit_item_from_dict(anime_id, inputs)
+
+    def onPushButtonDelete(self):
+        # Lấy chỉ số của item hiện tại trong listWidget 
+        curr_index = self.listWidgetAnime.currentRow()
+        # Kiểm tra item đã được chọn hay chưa 
+        if curr_index == -1:
+            QMessageBox.warning(self, "Error", "Bạn chưa chọn anime để xoá!")
+            return
+        
+        # Lấy anime hiện tại đang được chọn 
+        item = self.listWidgetAnime.item(curr_index)
+        item_title = item.text()
+
+        # Lấy id của bộ anime vừa chọn thông qua User role 
+        anime_id = item.data(Qt.ItemDataRole.UserRole)
+
+        # Hiển thị hộp thoại xác nhận 
+        question = QMessageBox.question(
+            self, 
+            "Remove Anime", 
+            f"Bạn có muốn xoá bộ anime '{item_title}'?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+        )
+
+        if question == QMessageBox.StandardButton.Yes:
+            # Xoá đi item khỏi listWidget 
+            self.listWidgetAnime.takeItem(curr_index)
+
+            # Gọi hàm xoá anime từ khỏi database
+            self.database.delete_item(anime_id)
+
+            QMessageBox.information(self, "Success", "Bạn đã xoá anime: " + item_title )
+
+
 

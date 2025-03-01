@@ -66,6 +66,19 @@ class AnimeDatabase:
         # Viết dữ liệu mới vào json
         write_anime_json_data(self.anime_dict_data) 
 
+    def delete_item(self, item_id):
+        # Lấy ra bộ anime cần xoá bằng id
+        anime_delete = self.get_item_by_id(item_id)
+        # Xoá bộ anime khỏi ds python 
+        self.anime_list.remove(anime_delete)
+        # Lấy ds json mới nhất từ ds đối tượng python
+        self.anime_dict_data = self.item_to_data()
+        # Viết dữ liệu json mới nhất vào file .json
+        write_anime_json_data(self.anime_dict_data)
+
+
+
+
 
 def date_to_text(date:datetime):
     return date.strftime("%b %Y")
