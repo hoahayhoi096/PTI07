@@ -30,6 +30,13 @@ class MainPage(QMainWindow):
         self.pushButtonDelete.clicked.connect(self.onPushButtonDelete)
 
         self.setup_rank_page()
+        
+        self.pushButtonTopAnime.clicked.connect(self.onPushButtonTopAnime)
+
+        
+
+
+
 
     def onPushButtonManager(self):
         self.stackedWidget.setCurrentIndex(3)
@@ -78,6 +85,8 @@ class MainPage(QMainWindow):
             # Lưu dữ liệu mới vào cơ sở dữ liệu
             self.database.add_item_from_dict(inputs)
 
+            self.setup_rank_page()
+
     def onPushButtonEdit(self):
         # Lấy phần tử trong listWidgetAnime
         current_item = self.listWidgetAnime.currentItem()
@@ -98,6 +107,8 @@ class MainPage(QMainWindow):
                 current_item.setText(inputs["title"])
                 # Cập nhật lại dữ liệu trong file json
                 self.database.edit_item_from_dict(anime_id, inputs)
+
+                self.setup_rank_page()
 
     def onPushButtonDelete(self):
         # Lấy chỉ số của item hiện tại trong listWidget 
@@ -130,6 +141,7 @@ class MainPage(QMainWindow):
             self.database.delete_item(anime_id)
 
             QMessageBox.information(self, "Success", "Bạn đã xoá anime: " + item_title )
+            self.setup_rank_page()
 
     def setup_rank_page(self):
 
@@ -163,6 +175,10 @@ class MainPage(QMainWindow):
             self.listWidgetAnimeRanking.addItem(item)
             # Kết hợp item và animeWidget để thêm vào listWidgetAnimeRanking
             self.listWidgetAnimeRanking.setItemWidget(item, animeWidget)
+
+    def onPushButtonTopAnime(self):
+        self.database.sort_item_by_rating()
+        self.setup_rank_page()
 
 
 

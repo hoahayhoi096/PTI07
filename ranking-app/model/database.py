@@ -1,3 +1,4 @@
+import operator
 from model.account import Account
 from model.anime import Anime
 from data.data_io import load_account_json_data, write_account_json_data, load_anime_json_data, write_anime_json_data
@@ -76,9 +77,15 @@ class AnimeDatabase:
         # Viết dữ liệu json mới nhất vào file .json
         write_anime_json_data(self.anime_dict_data)
 
+    def sort_item_by_rating(self):
+        self.anime_list = sorted(self.anime_list, 
+                                 key=operator.attrgetter('rating'),
+                                 reverse = True)
 
-
-
+    def sort_item_by_title(self):
+        pass
+    def sort_item_by_date(self):
+        pass
 
 def date_to_text(date:datetime):
     return date.strftime("%b %Y")

@@ -310,23 +310,23 @@
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_2">
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="pushButtonTopAnime">
                 <property name="text">
-                 <string>PushButton</string>
+                 <string>TOP ANIME</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_2">
+               <widget class="QPushButton" name="pushButtonLastest">
                 <property name="text">
-                 <string>PushButton</string>
+                 <string>LASTEST</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_3">
+               <widget class="QPushButton" name="pushButtonAtoZ">
                 <property name="text">
-                 <string>PushButton</string>
+                 <string>A-Z</string>
                 </property>
                </widget>
               </item>
