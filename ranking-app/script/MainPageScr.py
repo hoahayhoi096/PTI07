@@ -36,6 +36,7 @@ class MainPage(QMainWindow):
         self.pushButtonAtoZ.clicked.connect(self.onPushButtonAtoZ)
 
         self.pushButtonSearch_2.clicked.connect(self.onPushButtonSearch_2)
+        self.pushButtonSearch.clicked.connect(self.onPushButtonSearch)
 
 
 
@@ -210,7 +211,34 @@ class MainPage(QMainWindow):
                 item = self.listWidgetAnime.item(i)
                 item.setHidden(False)
 
+    def onPushButtonSearch(self):
+        # Lấy từ khoá từ lineEditSearch
+        keyword = self.lineEditSearch.text().strip()
 
+        # Mở trang ranking
+        self.stackedWidget.setCurrentIndex(2)
+
+        # Kiểm tra từ khoá có rỗng hay không
+        if keyword:
+            for i in range(self.listWidgetAnimeRanking.count()):
+                item = self.listWidgetAnimeRanking.item(i)
+                # Lấy widget con của item
+                animeWidget = self.listWidgetAnimeRanking.itemWidget(item)
+                if animeWidget:
+                    # Kiểm tra từ khoá có trong tiêu đề của item hay không
+                    animeTitle = animeWidget.anime.title.lower()
+                    if keyword.lower() in animeTitle:
+                        # Hiển thị item đó lên listWidget
+                        item.setHidden(False)
+                    else:
+                        item.setHidden(True)
+        else:
+            # Hiển thị tất cả item
+            for i in range(self.listWidgetAnimeRanking.count()):
+                item = self.listWidgetAnimeRanking.item(i)
+                item.setHidden(False)
+
+        
         
 
 
