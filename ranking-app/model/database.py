@@ -83,9 +83,21 @@ class AnimeDatabase:
                                  reverse = True)
 
     def sort_item_by_title(self):
-        pass
+        self.anime_list = sorted(self.anime_list, 
+                                      key=operator.attrgetter('title')
+                                      )
+    
     def sort_item_by_date(self):
-        pass
+        self.anime_list = sorted(self.anime_list, 
+                                      key=lambda x: format_date(x.release_date),
+                                      reverse=True) 
+        
+    # def sort_item_by_date(self, top=None):
+    #     self.anime_list = sorted(self.anime_list, 
+    #                                   key=lambda x: format_date(x.release_date),
+    #                                   reverse=True)
+    #     if top:
+    #         return self.anime_list[top]
 
 def date_to_text(date:datetime):
     return date.strftime("%b %Y")

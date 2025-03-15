@@ -1,5 +1,5 @@
 import os
-
+import webbrowser
 from PyQt6 import uic
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QWidget
@@ -19,6 +19,10 @@ class AnimeItemWidget(QWidget):
         self.anime = anime
         self.display_description()
 
+        self.ui.animeCol.mouseDoubleClickEvent = lambda x: self.open_link(self.anime.link)
+        if self.anime.link != 'None':
+            self.ui.animeCol.setToolTip("Double click to watch")
+
 
     def display_description(self):
         description_text = self.anime.release_date + "\n" \
@@ -28,4 +32,8 @@ class AnimeItemWidget(QWidget):
         self.ui.animeView.setPixmap(img_pixmap)
         self.ui.animeTitle.setText(self.anime.title)
         self.ui.animeInfo.setText(description_text)
+
+    def open_link(self, url):
+        if url != 'None':
+            webbrowser.open(url)
 

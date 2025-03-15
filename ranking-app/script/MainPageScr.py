@@ -32,8 +32,10 @@ class MainPage(QMainWindow):
         self.setup_rank_page()
         
         self.pushButtonTopAnime.clicked.connect(self.onPushButtonTopAnime)
+        self.pushButtonLastest.clicked.connect(self.onPushButtonLastest)
+        self.pushButtonAtoZ.clicked.connect(self.onPushButtonAtoZ)
 
-        
+        self.pushButtonSearch_2.clicked.connect(self.onPushButtonSearch_2)
 
 
 
@@ -180,7 +182,36 @@ class MainPage(QMainWindow):
         self.database.sort_item_by_rating()
         self.setup_rank_page()
 
+    def onPushButtonLastest(self):
+        self.database.sort_item_by_date()
+        self.setup_rank_page()
 
+    def onPushButtonAtoZ(self):
+        self.database.sort_item_by_title()
+        self.setup_rank_page()
+
+    def onPushButtonSearch_2(self):
+        # Lấy từ khoá từ lineEditSearch_2
+        keyword = self.lineEditSearch_2.text().strip()
+
+        # Kiểm tra từ khoá có rỗng hay không
+        if keyword:
+            for i in range(self.listWidgetAnime.count()):
+                item = self.listWidgetAnime.item(i)
+                # Kiểm tra từ khoá có trong tiêu đề của item hay không
+                if keyword.lower() in item.text().lower():
+                    # Hiển thị item đó lên listWidget
+                    item.setHidden(False)
+                else:
+                    item.setHidden(True)
+        else:
+            # Hiển thị tất cả item
+            for i in range(self.listWidgetAnime.count()):
+                item = self.listWidgetAnime.item(i)
+                item.setHidden(False)
+
+
+        
 
 
 
