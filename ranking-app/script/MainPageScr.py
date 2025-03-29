@@ -237,9 +237,3 @@ class MainPage(QMainWindow):
             for i in range(self.listWidgetAnimeRanking.count()):
                 item = self.listWidgetAnimeRanking.item(i)
                 item.setHidden(False)
-
-        
-        
-
-
-

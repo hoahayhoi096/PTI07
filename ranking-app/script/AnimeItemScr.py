@@ -19,10 +19,12 @@ class AnimeItemWidget(QWidget):
         self.anime = anime
         self.display_description()
 
-        self.ui.animeCol.mouseDoubleClickEvent = lambda x: self.open_link(self.anime.link)
+        # Thông báo khi hover vào 
         if self.anime.link != 'None':
             self.ui.animeCol.setToolTip("Double click to watch")
 
+        self.ui.animeCol.mouseDoubleClickEvent = lambda x: self.open_link(self.anime.link)
+        
 
     def display_description(self):
         description_text = self.anime.release_date + "\n" \
@@ -34,6 +36,6 @@ class AnimeItemWidget(QWidget):
         self.ui.animeInfo.setText(description_text)
 
     def open_link(self, url):
+        print(url)
         if url != 'None':
-            webbrowser.open(url)
-
+            webbrowser.open(str(url))

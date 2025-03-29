@@ -33,7 +33,8 @@ class AnimeDatabase:
             anime = Anime(title = anime_dict["title"],
                               release_date= anime_dict["release_date"],
                               image=anime_dict["image"],
-                              rating=anime_dict["rating"])
+                              rating=anime_dict["rating"],
+                              link=anime_dict["link"])
             self.anime_list.append(anime)
 
     # chuyển object python sang json
