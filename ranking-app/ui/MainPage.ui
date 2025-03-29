@@ -226,8 +226,31 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="styleSheet">
+             <string notr="true">border-radius: 20px; background-color: white;</string>
+            </property>
             <property name="text">
              <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButtonMicrophone">
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border-radius: 10px;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../resources/images/free-microphone-icon-342-thumb-removebg-preview (1).png</normaloff>../resources/images/free-microphone-icon-342-thumb-removebg-preview (1).png</iconset>
             </property>
            </widget>
           </item>
@@ -238,6 +261,9 @@
               <width>200</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">border-radius: 10px; background-color: white;</string>
             </property>
             <property name="text">
              <string>SEARCH</string>

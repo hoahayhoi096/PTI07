@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QMessageBox, QListView, QAbstractItemView
+from PyQt6.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QMessageBox, QListView, QAbstractItemView
 from PyQt6 import uic 
 import os
 from config import Config
@@ -6,6 +6,7 @@ from PyQt6.QtCore import Qt, QSize
 from script.DialogScr import AddDialog , EditDialog
 from script.AnimeItemScr import AnimeItemWidget
 
+import speech_recognition as sr
 
 class MainPage(QMainWindow):  
     def __init__(self, controller, database):
@@ -38,7 +39,8 @@ class MainPage(QMainWindow):
         self.pushButtonSearch_2.clicked.connect(self.onPushButtonSearch_2)
         self.pushButtonSearch.clicked.connect(self.onPushButtonSearch)
 
-
+        # Kết nối tới hàm chuyển giọng nói thành văn bản
+        self.pushButtonMicrophone.clicked.connect(self.onPushButtonMicrophone)
 
 
     def onPushButtonManager(self):
@@ -237,3 +239,28 @@ class MainPage(QMainWindow):
             for i in range(self.listWidgetAnimeRanking.count()):
                 item = self.listWidgetAnimeRanking.item(i)
                 item.setHidden(False)
+
+
+    def onPushButtonMicrophone(self):
+        # Khởi tạo đối tượng nhận diện giọng nói
+        recognizer = sr.Recognizer()
+
+        self.lineEditSearch.setPlaceholderText("Đang lắng nghe.. Hãy nói vào microphone!")
+
+        # Cập nhật giao diện ngay lập tức
+        QApplication.processEvents()
+
+        with sr.Microphone() as source:
+            # Dùng cú pháp Try - Except để ngừa ứng dụng bị sập
+            try:
+                audio = recognizer.listen(source, timeout=5)
+                text = recognizer.recognize_google(audio, language="vi-VN") # Nhận diện được tiếng việt
+
+                self.lineEditSearch.setText(text)
+
+            except sr.UnknownValueError:
+                self.lineEditSearch.setPlaceholderText("Không nhận diện được giọng nói.")
+            except sr.RequestError:
+                self.lineEditSearch.setPlaceholderText("Lỗi kết nối dịch vụ nhận diện.")
+
+
